@@ -1,0 +1,85 @@
+## Игнорировать файлы сборки и запуска ##
+bin/
+obj/
+out/
+publish/
+appsettings.Development.json
+
+## Игнорировать файлы IDE ##
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userprefs
+*.vsp
+*.pidb
+*.njsproj
+*.sln.iml
+
+## Игнорировать системные файлы ##
+Thumbs.db
+ehthumbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+## Игнорировать файлы пакетов ##
+packages/
+*.nupkg
+.npm/
+node_modules/
+
+## Игнорировать временные файлы ##
+*.tmp
+*.temp
+*.log
+*.bak
+*.cache
+*.orig
+
+## Игнорировать результаты тестов ##
+TestResults/
+coverage.xml
+*.coverage
+*.lcov
+
+## Игнорировать пользовательские настройки ##
+appsettings.local.json
+appsettings.private.json
+launchSettings.json
+
+## Игнорировать файлы миграций EF Core ##
+Migrations/
+!Migrations/*Snapshot.cs  # Включить обратно только снимки
+
+## Игнорировать специфичные для проекта файлы ##
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+## Игнорировать файлы Swagger ##
+swagger.json
+swagger.yaml
+
+## Игнорировать файлы Docker ##
+Dockerfile
+docker-compose.*
+.dockerignore
+
+## Игнорировать файлы редакторов ##
+*~
+*.swp
+*.swo
+*.swn
+
+## Игнорировать директорию для запуска ##
+.run/
+
+## Игнорировать секреты ##
+secrets.json
+appsettings.secrets.json
+
+## Игнорировать пользовательские зависимости ##
+Properties/serviceDependencies*.json
