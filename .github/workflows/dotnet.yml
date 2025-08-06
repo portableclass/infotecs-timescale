@@ -11,38 +11,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-    - name: Setup .NET
+    - name: Setup .NET SDK
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore TimeScaleAPI/TimeScaleAPI.csproj
+      run: dotnet restore TimeScaleAPI.UnitTests/TimeScaleAPI.UnitTests.sln
 
-    - name: Build
-      run: dotnet build TimeScaleAPI/TimeScaleAPI.csproj --no-restore --configuration Release
+    - name: Build solution
+      run: dotnet build TimeScaleAPI.UnitTests/TimeScaleAPI.UnitTests.sln --configuration Release --no-restore
 
     - name: Run tests with coverage
       run: |
-        cd TimeScaleAPI.UnitTests
-        dotnet test --no-build --configuration Release \
-          --verbosity normal \
+        dotnet test TimeScaleAPI.UnitTests/TimeScaleAPI.UnitTests.sln \
+          --configuration Release \
+          --no-build \
           --collect:"XPlat Code Coverage"
 
-    - name: Install ReportGenerator
+    - name: Install reportgenerator
       run: dotnet tool install -g dotnet-reportgenerator-globaltool
 
     - name: Convert coverage to lcov
       run: |
-        export PATH="$PATH:$HOME/.dotnet/tools"
-        REPORT_PATH=$(find . -type f -name 'coverage.cobertura.xml' | head -n 1)
-        reportgenerator -reports:$REPORT_PATH -targetdir:coverage -reporttypes:lcov
+        reportgenerator \
+          -reports:**/coverage.cobertura.xml \
+          -targetdir:coverage \
+          -reporttypes:lcov
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v5
       with:
-        token: ${{ secrets.CODECOV_TOKEN }}
         files: ./coverage/lcov.info
-        fail_ci_if_error: true
+        token: ${{ secrets.CODECOV_TOKEN }}
