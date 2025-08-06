@@ -83,3 +83,6 @@ appsettings.secrets.json
 
 ## Игнорировать пользовательские зависимости ##
 Properties/serviceDependencies*.json
+
+#
+.env.local
